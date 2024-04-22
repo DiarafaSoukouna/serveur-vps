@@ -586,6 +586,14 @@
                                   {{ option.nom }}
                                 </option>
                               </select>
+                              <div class="input-group">
+                                <input
+                                  v-model="email_client"
+                                  type="text"
+                                  class="input-field"
+                                  placeholder="email client"
+                                />
+                              </div>
                             </div>
                           </div>
 
@@ -778,6 +786,14 @@
                           {{ option.nom }}
                         </option>
                       </select>
+                      <div class="input-group">
+                        <input
+                          v-model="email_client"
+                          type="text"
+                          class="input-field"
+                          placeholder="email client"
+                        />
+                      </div>
                     </div>
                     <button
                       class="closeBtn"
@@ -863,6 +879,7 @@ export default {
       sous: false,
       nom_domaine: "",
       prix: "",
+      email_client: "",
       client: "",
       date_creation: "",
       date_expiration: "",
@@ -922,6 +939,7 @@ export default {
             nom: this.nom_domaine,
             prix_annuel: this.prix,
             client: this.client,
+            email_client: this.email_client,
             date_creation: this.date_creation,
             date_expiration: this.date_expiration,
             nom_hote: this.nom_hoteD,
@@ -1025,6 +1043,7 @@ export default {
             nom: this.nom_domaine,
             prix_annuel: this.prix,
             client: this.client,
+            email_client: this.email_client,
             date_creation: this.date_creation,
             date_expiration: this.date_expiration,
             nom_hote: this.nom_hoteD,
@@ -1053,6 +1072,7 @@ export default {
           this.nom_domaine = i.nom;
           this.prix = i.prix_annuel;
           this.client = i.client;
+          this.email_client = i.email_client;
           this.date_creation = this.formatDate(i.date_creation);
           this.date_expiration = this.formatDate(i.date_expiration);
           this.nom_hoteD = i.nom_hote;

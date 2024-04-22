@@ -55,6 +55,7 @@ app.post("/insertDomaine", async (req, res) => {
     nom,
     prix_annuel,
     client,
+    email_client,
     date_creation,
     date_expiration,
     nom_hote,
@@ -65,13 +66,14 @@ app.post("/insertDomaine", async (req, res) => {
   } = req.body;
 
   const query =
-    "INSERT INTO domaines (nom, prix_annuel, client, date_creation, date_expiration, nom_hote, nom_utilisateur, mot_de_passe, vps_id, parent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO domaines (nom, prix_annuel, client, email_client, date_creation, date_expiration, nom_hote, nom_utilisateur, mot_de_passe, vps_id, parent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   connection.query(
     query,
     [
       nom,
       prix_annuel,
       client,
+      email_client,
       date_creation,
       date_expiration,
       nom_hote,
@@ -199,6 +201,7 @@ app.post("/updateDomaine", async (req, res) => {
     nom,
     prix_annuel,
     client,
+    email_client,
     date_creation,
     date_expiration,
     nom_hote,
@@ -209,13 +212,14 @@ app.post("/updateDomaine", async (req, res) => {
   } = req.body;
 
   const query =
-    "UPDATE domaines SET nom=?, prix_annuel=?, client=?, date_creation=?, date_expiration=?, nom_hote=?, nom_utilisateur=?, mot_de_passe=?, vps_id=?, parent=?  WHERE id_domaine=? ";
+    "UPDATE domaines SET nom=?, prix_annuel=?, client=?, email_client=?, date_creation=?, date_expiration=?, nom_hote=?, nom_utilisateur=?, mot_de_passe=?, vps_id=?, parent=?  WHERE id_domaine=? ";
   connection.query(
     query,
     [
       nom,
       prix_annuel,
       client,
+      email_client,
       date_creation,
       date_expiration,
       nom_hote,
@@ -542,25 +546,15 @@ function sendMail(user) {
  
           </br>
           </br>
-          Nous vous contactons pour vous rappeler que le paiement pour votre nom de domaine est actuellement en retard.</br>
-           Pour assurer la continuité du service, nous vous encourageons à régler votre facture dès que possible.</br>
-          
+          Nous venons par la présente vous informer que votre nom de domaine <strong>${
+            user.nom
+          }</strong> arrive à échéance le ${
+      date.getDate() + "/" + "0" + date.getMonth() + "/" + date.getFullYear()
+    } .</br>
           </br>
-         
-      
-          - Montant dû : ${user.prix_annuel}</br>
-          - Date limite de paiement :${
-            date.getDate() +
-            "/" +
-            "0" +
-            date.getMonth() +
-            "/" +
-            date.getFullYear()
-          }</br>
-          
-          Veuillez noter que si le paiement n'est pas reçu d'ici la date limite , votre service pourrait être suspendu.</br>
-     
-          Nous vous remercions de votre compréhension et de votre coopération.</br>
+Pour assurer la continuité du service, nous vous invitons à régler votre facture ci-jointe dès que possible.
+Veuillez noter que si le paiement n'est pas reçu d'ici la date limite , votre service pourrait être suspendu.<br>
+Nous vous remercions de votre compréhension!
           </br>
           </br>
           Cordialement, </br>
